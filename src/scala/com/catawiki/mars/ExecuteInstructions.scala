@@ -25,8 +25,8 @@ class RobotRotator {
   def apply(instruction: Instruction, position: RobotPosition) = {
     val directionIndex = orderedDirections.indexOf(position.direction)
     val newDirectionIndex = instruction match {
-      case Left() => if (directionIndex == 0) 3 else directionIndex - 1
-      case Right() => if (directionIndex == 3) 0 else directionIndex + 1
+      case Left() => (directionIndex + 3) % 4
+      case Right() => (directionIndex + 1) % 4
     }
     position.copy(direction = orderedDirections(newDirectionIndex))
   }
